@@ -1,0 +1,23 @@
+{
+  "name": "zl-ver-menu",
+  "version": "1.0.0",
+  "description": "jquery写的一个垂直菜单",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/zhangluzhanglu/zl-ver-menu.git"
+  },
+  "keywords": [],
+  "author": "张路",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhangluzhanglu/zl-ver-menu/issues"
+  },
+  "homepage": "https://github.com/zhangluzhanglu/zl-ver-menu#readme"
+}

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+    <script src="../index.js"></script>
+</head>
+
+<body>
+    <div class="your-menu"></div>
+    <script>
+        zl_ver_menu = window["zl-ver-menu"]; //从window上获取zl-ver-menu方法
+        ////调用此方法生成垂直菜单（class名和上面html元素的class名一致即可，可以任取）
+        zl_ver_menu({
+            menuClassName: "your-menu", //菜单容器元素的class名
+            callback: function (par) { console.log(par) }, //点击具体的菜单项后要执行的函数（par默认会传入点击的节点）
+            show: true //此垂直菜单默认为全部展开
+        });
+    </script>
+
+</body>
+
+</html>
