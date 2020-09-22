@@ -1,7 +1,7 @@
 {
   "name": "zl-ver-menu",
-  "version": "1.0.0",
-  "description": "jquery写的一个垂直菜单",
+  "version": "1.0.1",
+  "description": "递归写的一个垂直菜单",
   "main": "index.js",
   "directories": {
     "test": "test"
