@@ -27,15 +27,38 @@ https://zhangluzhanglu.github.io/code/zl-ver-menu.html
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>zl-ver-menu使用演示</title>
     <script src="https://cdn.jsdelivr.net/npm/blogzl-indexjs@18.0.0/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/zl-ver-menu@1.0.1/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/zl-ver-menu@1.0.3/index.js"></script>
 </head>
 
 <body>
     <div class="your-menu"></div>
     <script>
         zl_ver_menu = window["zl-ver-menu"]; //从window上获取zl-ver-menu方法
+        //准备cata数据
+        let dataList = [
+            {
+                "id": 6,
+                "parent_id": 0,
+                "name": "李冰有限公司A",
+                "children": [
+                    {
+                        "id": 7,
+                        "parent_id": 6,
+                        "name": "财务部",
+                        "children": []
+                    },
+                    {
+                        "id": 108,
+                        "parent_id": 6,
+                        "name": "第二个部门",
+                        "children": []
+                    }
+                ]
+            }
+        ];
         //调用此方法生成垂直菜单（class名和上面html元素的class名一致即可，可以任取）
         zl_ver_menu({
+            data:dataList, //菜单数据
             menuClassName: "your-menu", //菜单容器元素的class名
             callback: function (par) { console.log(par) }, //点击具体的菜单项后要执行的函数（par默认会传入点击的节点）
             show: true //此垂直菜单默认为全部展开
@@ -49,16 +72,36 @@ https://zhangluzhanglu.github.io/code/zl-ver-menu.html
 ## 方式二：在webpack中，使用 import 标签引入进行使用
 
 ```js
-import zl_ver_menu from "zl-ver-menu";
-
-//调用此方法生成垂直菜单（class名和上面html元素的class名一致即可，可以任取）
-zl_ver_menu({
-  menuClassName: "your-menu", //菜单容器元素的class名
-  callback: function (par) {
-    console.log(par);
-  }, //点击具体的菜单项后要执行的函数（par默认会传入点击的节点）
-  show: true, //此垂直菜单默认为全部展开
-});
+     import zl_ver_menu from "zl-ver-menu";
+       //准备cata数据
+       let dataList = [
+            {
+                "id": 6,
+                "parent_id": 0,
+                "name": "李冰有限公司A",
+                "children": [
+                    {
+                        "id": 7,
+                        "parent_id": 6,
+                        "name": "财务部",
+                        "children": []
+                    },
+                    {
+                        "id": 108,
+                        "parent_id": 6,
+                        "name": "第二个部门",
+                        "children": []
+                    }
+                ]
+            }
+        ];
+        //调用此方法生成垂直菜单（class名和上面html元素的class名一致即可，可以任取）
+        zl_ver_menu({
+            data:dataList, //菜单数据
+            menuClassName: "your-menu", //菜单容器元素的class名
+            callback: function (par) { console.log(par) }, //点击具体的菜单项后要执行的函数（par默认会传入点击的节点）
+            show: true //此垂直菜单默认为全部展开
+        });
 ```
 
 # 实现说明
