@@ -225,7 +225,7 @@
       if (!parObj.callback) {
           parObj.callback = function (par) { console.log(par); };
       }
-      if (!parObj.show) {
+      if (parObj.show==undefined) {
           parObj.show = true;
       }
       if (!parObj.data) {
