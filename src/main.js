@@ -4,12 +4,14 @@ import data from "./testData";
 /**
   * 作用与目的：调用creatVerMenu函数得到正在的菜单DOM
   * @parObj: 参数对象
+  *  parObj.data {Object[]} 构建菜单的对象数组数据
   *  parObj.menuClassName {String} 构建菜单的元素class
   *  parObj.callback {function} 点击具体的菜单项后要执行的函数（par默认会传入点击的节点）
   *  parObj.show {boolean} 默认全部展开还是全部收缩，默认我true.全部展开
   * */
 export default function getRealDom(parObj = {
-    menuClassName:"zl-ver-menu",
+    data: data,
+    menuClassName: "zl-ver-menu",
     callback: function (par) { console.log(par) },
     show: true
 }) {
@@ -88,7 +90,20 @@ export default function getRealDom(parObj = {
     </style>
         `)
     }
-    document.querySelector(`.${parObj.menuClassName}`).innerHTML = creatVerMenu(data);
+    // 允许用户不传递任何参数 或者 只传递部分参数属性进入
+    if (!parObj.menuClassName) {
+        parObj.menuClassName = "zl-ver-menu";
+    }
+    if (!parObj.callback) {
+        parObj.callback = function (par) { console.log(par) };
+    }
+    if (!parObj.show) {
+        parObj.show = true;
+    }
+    if (!parObj.data) {
+        parObj.data = data;
+    }
+    document.querySelector(`.${parObj.menuClassName}`).innerHTML = creatVerMenu(parObj.data);
     //设置垂直菜单的鼠标事件
     let i = 0;
     $(`.${parObj.menuClassName} li`).each(function () {
@@ -133,7 +148,7 @@ export default function getRealDom(parObj = {
             $(this).find("i").removeClass("triangle").addClass("triangle_open");
         }
     })
-    if(!parObj.show){
+    if (!parObj.show) {
         $(`.${parObj.menuClassName}> ul >li > ul`).hide();
     }
 }
