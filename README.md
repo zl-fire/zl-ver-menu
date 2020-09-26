@@ -27,7 +27,7 @@ https://zhangluzhanglu.github.io/code/zl-ver-menu.html
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>zl-ver-menu使用演示</title>
     <script src="https://cdn.jsdelivr.net/npm/blogzl-indexjs@18.0.0/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/zl-ver-menu@1.0.4/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/zl-ver-menu@1.0.5/index.js"></script>
 </head>
 
 <body>
