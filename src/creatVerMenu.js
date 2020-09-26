@@ -39,6 +39,6 @@ export default function creatVerMenu(item, padding = 20) {
         if (item.icon) {
             icon = `<i class="${item.icon}"></i>`
         }
-        return `<li sto_id="${item.id}" style="padding-left: ${padding}px"> ${icon} <span>${item.name}</span> </li>`;
+        return `<li data-menu-id="${item.id}" data-parent-id="${item.parent_id}" style="padding-left: ${padding}px"> ${icon} <span>${item.name}</span> </li>`;
     }
 }
