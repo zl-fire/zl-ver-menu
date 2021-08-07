@@ -69,7 +69,7 @@ https://zhangluzhanglu.github.io/code/zl-ver-menu.html
 </html>
 ```
 
-## 方式二：在webpack中，使用 import 标签引入进行使用
+## 方式二：使用 import 标签引入进行使用
 
 ```js
      import zl_ver_menu from "zl-ver-menu";
