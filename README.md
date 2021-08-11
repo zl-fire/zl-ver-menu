@@ -4,7 +4,7 @@
 
 # 演示地址
 
-https://zhangluzhanglu.github.io/code/zl-ver-menu.html
+https://zl-fire.github.io/code/zl-ver-menu.html
 
 # 使用前提
 
