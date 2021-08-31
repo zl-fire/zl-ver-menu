@@ -1,6 +1,6 @@
 {
   "name": "zl-ver-menu",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "递归写的一个垂直菜单",
   "main": "index.js",
   "directories": {
@@ -8,7 +8,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "packager": "rollup src/main.js --file index.js --format umd --name 'zl-ver-menu'"
+    "pak": "rollup src/main.js --file index.js --format umd --name 'zl-ver-menu'",
+    "getDTS": "tsc -d --allowJS src/*.js"
   },
   "repository": {
     "type": "git",

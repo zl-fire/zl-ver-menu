@@ -31,7 +31,7 @@ export default function creatVerMenu(item, padding = 20) {
         } else {
             icon = `<i class="triangle"></i>`;
         }
-        return `<li data-menu-id="${item.id}" data-parent-id="${item.parent_id}" ><div class="tit-menu" style="padding-left: ${padding}px" >${icon} <span>${item.name}</span></div>${creatVerMenu(item.children, padding + 20)}</li>`
+        return `<li data-menu-id="${item.id}" data-id="${item.eleId||''}" data-parent-id="${item.parent_id}" ><div class="tit-menu" style="padding-left: ${padding}px" >${icon} <span>${item.name}</span></div>${creatVerMenu(item.children, padding + 20)}</li>`
     }
     //没有孩子节点了
     if (typeof item === "object" && item.children.length === 0) {
@@ -39,6 +39,6 @@ export default function creatVerMenu(item, padding = 20) {
         if (item.icon) {
             icon = `<i class="${item.icon}"></i>`
         }
-        return `<li data-menu-id="${item.id}" data-parent-id="${item.parent_id}" style="padding-left: ${padding}px"> ${icon} <span>${item.name}</span> </li>`;
+        return `<li data-menu-id="${item.id}" data-id="${item.eleId|''}" data-parent-id="${item.parent_id}" style="padding-left: ${padding}px"> ${icon} <span>${item.name}</span> </li>`;
     }
 }
