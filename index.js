@@ -37,7 +37,7 @@
           } else {
               icon = `<i class="triangle"></i>`;
           }
-          return `<li data-menu-id="${item.id}" data-id="${item.eleId||''}" data-parent-id="${item.parent_id}" ><div class="tit-menu" style="padding-left: ${padding}px" >${icon} <span>${item.name}</span></div>${creatVerMenu(item.children, padding + 20)}</li>`
+          return `<li data-menu-id="${item.id}" data-id="${item.eleId}" data-parent-id="${item.parent_id}" ><div class="tit-menu" style="padding-left: ${padding}px" >${icon} <span>${item.name}</span></div>${creatVerMenu(item.children, padding + 20)}</li>`
       }
       //没有孩子节点了
       if (typeof item === "object" && item.children.length === 0) {
@@ -45,7 +45,7 @@
           if (item.icon) {
               icon = `<i class="${item.icon}"></i>`;
           }
-          return `<li data-menu-id="${item.id}" data-id="${item.eleId|''}" data-parent-id="${item.parent_id}" style="padding-left: ${padding}px"> ${icon} <span>${item.name}</span> </li>`;
+          return `<li data-menu-id="${item.id}" data-id="${item.eleId}" data-parent-id="${item.parent_id}" style="padding-left: ${padding}px"> ${icon} <span>${item.name}</span> </li>`;
       }
   }
 
@@ -54,6 +54,7 @@
           "id": 6,
           "parent_id": 0,
           "name": "李冰有限公司A",
+          "eleId":123,
           "children": [
               {
                   "id": 7,
@@ -136,7 +137,7 @@
     * @param {string} parObj.menuClassName  构建菜单的元素class
     * @param {string} parObj.width  菜单容器的宽度，默认230px（传参时传入字符串形式，如 400px）
     * @param {function} parObj.callback  点击具体的菜单项后要执行的函数（par默认会传入点击的节点）
-    * @param {boolean} parObj.show {boolean} 默认全部展开还是全部收缩，默认我true.全部展开
+    * @param {boolean} parObj.show {boolean} 默认全部展开还是全部收缩，默认为true.全部展开
     * @return {object|viod} 当在node端调用时，将返回一个对象{ styleStr, templateStr, jsStr }，表示菜单的html+css+js . 在浏览器调用时将会把菜单直接写入到页面上
     * */
   function getRealDom(parObj) {
@@ -152,7 +153,7 @@
           window;
           // 先写入全局样式
           if (!$("style." + menuClassName + "-style")[0]) {
-              $("head").append(createDefaultStyle(menuClassName));
+              $("head").append(createDefaultStyle(menuClassName,width));
           }
           document.querySelector("." + menuClassName).innerHTML = creatVerMenu(data$1);
           //设置垂直菜单的鼠标事件

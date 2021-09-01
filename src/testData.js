@@ -3,6 +3,7 @@ let data=[
         "id": 6,
         "parent_id": 0,
         "name": "李冰有限公司A",
+        "eleId":123,
         "children": [
             {
                 "id": 7,

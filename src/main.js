@@ -24,7 +24,7 @@ export default function getRealDom(parObj) {
         window;
         // 先写入全局样式
         if (!$("style." + menuClassName + "-style")[0]) {
-            $("head").append(createDefaultStyle(menuClassName));
+            $("head").append(createDefaultStyle(menuClassName,width));
         }
         document.querySelector("." + menuClassName).innerHTML = creatVerMenu(data);
         //设置垂直菜单的鼠标事件
