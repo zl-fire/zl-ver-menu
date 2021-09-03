@@ -311,13 +311,15 @@ $("." + ${menuClassName} + " li").each(function () {
     var _this = this;
 
     if (!$(this).children("ul")[0]) {
-        // 当没有给定任何锚点时，打开就选中第一个
-        if (i == 0 && location.hash == "") {
-            i++;
-            setTimeout(function () {
-                $(_this).click();
-                $(_this).addClass("summary-active ");
-            }, 0);
+        if (show && defaultSelect) {
+            // 当没有给定任何锚点时，打开就选中第一个
+            if (i == 0 && location.hash == "") {
+                i++;
+                setTimeout(function () {
+                    $(_this).click();
+                    $(_this).addClass("summary-active ");
+                }, 0);
+            }
         }
         $(this).on({
             mouseover: function mouseover() {
