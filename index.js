@@ -217,7 +217,7 @@
           //样式字符串
           let styleStr = createDefaultStyle(menuClassName, width);
           //逻辑字符串
-          let jsStr = bindScript(menuClassName, show, callback);
+          let jsStr = bindScript({menuClassName, show, defaultSelect,callback});
           return { styleStr, templateStr, jsStr };
       }
   }
@@ -300,7 +300,7 @@
   }
 
   // 获取样逻辑符串
-  function bindScript(menuClassName, show, callback) {
+  function bindScript({menuClassName, show, defaultSelect,callback}) {
       menuClassName = "'" + menuClassName + "'";
       return `
 <script>
@@ -311,7 +311,7 @@ $("." + ${menuClassName} + " li").each(function () {
     var _this = this;
 
     if (!$(this).children("ul")[0]) {
-        if (show && defaultSelect) {
+        if (${show} && ${defaultSelect}) {
             // 当没有给定任何锚点时，打开就选中第一个
             if (i == 0 && location.hash == "") {
                 i++;
