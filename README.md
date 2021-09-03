@@ -117,6 +117,7 @@ https://zl-fire.github.io/code/zl-ver-menu.html
   * @param {string} parObj.width  菜单容器的宽度，默认230px（传参时传入字符串形式，如 400px）
   * @param {function} parObj.callback  点击具体的菜单项后要执行的函数（par默认会传入点击的节点）
   * @param {boolean} parObj.show {boolean} 默认全部展开还是全部收缩，默认为true.全部展开
+  * @param {boolean} parObj.defaultSelect {boolean} 默认全部展开全部时（show=true），是否默认选中第一个菜单,默认为true，即选择第一个菜单
   * @return {object|viod} 当在node端调用时，将返回一个对象{ styleStr, templateStr, jsStr }，表示菜单的html+css+js . 在浏览器调用时将会把菜单直接写入到页面上
   * */
 ```

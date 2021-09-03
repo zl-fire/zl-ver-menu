@@ -138,6 +138,7 @@
     * @param {string} parObj.width  菜单容器的宽度，默认230px（传参时传入字符串形式，如 400px）
     * @param {function} parObj.callback  点击具体的菜单项后要执行的函数（par默认会传入点击的节点）
     * @param {boolean} parObj.show {boolean} 默认全部展开还是全部收缩，默认为true.全部展开
+    * @param {boolean} parObj.defaultSelect {boolean} 默认全部展开全部时（show=true），是否默认选中第一个菜单,默认为true，即选择第一个菜单
     * @return {object|viod} 当在node端调用时，将返回一个对象{ styleStr, templateStr, jsStr }，表示菜单的html+css+js . 在浏览器调用时将会把菜单直接写入到页面上
     * */
   function getRealDom(parObj) {
@@ -146,14 +147,15 @@
           menuClassName = "zl-ver-menu",
           callback = function (par) { console.log(par); },
           show = true,
-          width="230px"
+          defaultSelect=true,
+          width = "230px"
       } = parObj;
       //如果是在浏览器
       try {
           window;
           // 先写入全局样式
           if (!$("style." + menuClassName + "-style")[0]) {
-              $("head").append(createDefaultStyle(menuClassName,width));
+              $("head").append(createDefaultStyle(menuClassName, width));
           }
           document.querySelector("." + menuClassName).innerHTML = creatVerMenu(data$1);
           //设置垂直菜单的鼠标事件
@@ -162,14 +164,18 @@
               var _this = this;
 
               if (!$(this).children("ul")[0]) {
-                  // 当没有给定任何锚点时，打开就选中第一个
-                  if (i == 0 && location.hash == "") {
-                      i++;
-                      setTimeout(function () {
-                          $(_this).click();
-                          $(_this).addClass("summary-active ");
-                      }, 0);
+
+                  if (show && defaultSelect) {
+                      // 当没有给定任何锚点时，打开就选中第一个
+                      if (i == 0 && location.hash == "") {
+                          i++;
+                          setTimeout(function () {
+                              $(_this).click();
+                              $(_this).addClass("summary-active ");
+                          }, 0);
+                      }
                   }
+
                   $(this).on({
                       mouseover: function mouseover() {
                           $(this).css({ "background-color": "#E9F2FF" });
@@ -209,7 +215,7 @@
           //模板字符串
           let templateStr = "<section class='" + menuClassName + "'>" + creatVerMenu(data$1) + "</section>";
           //样式字符串
-          let styleStr = createDefaultStyle(menuClassName,width);
+          let styleStr = createDefaultStyle(menuClassName, width);
           //逻辑字符串
           let jsStr = bindScript(menuClassName, show, callback);
           return { styleStr, templateStr, jsStr };
@@ -217,7 +223,7 @@
   }
 
   // 获取样式字符串
-  function createDefaultStyle(menuClassName,width) {
+  function createDefaultStyle(menuClassName, width) {
       return `
     <style class="${menuClassName}-style" >
     html,
