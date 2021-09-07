@@ -304,7 +304,7 @@
       menuClassName = "'" + menuClassName + "'";
       return `
 <script>
-let callback=${callback};
+var callback=${callback};
 //设置垂直菜单的鼠标事件
 var i = 0;
 $("." + ${menuClassName} + " li").each(function () {
