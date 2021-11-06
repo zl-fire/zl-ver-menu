@@ -34,11 +34,18 @@
                         "children": []
                     }
                 ]
+            },
+            {
+                "id": 7,
+                "parent_id": 0,
+                "name": "李冰有限公司B",
+                "eleId": 123,
+                "children": []
             }
         ];
         //调用此方法生成垂直菜单（class名和上面html元素的class名一致即可，可以任取）
         zl_ver_menu({
-            data: dataList, //菜单数据
+            // data: dataList, //菜单数据
             menuClassName: "your-menu", //菜单容器元素的class名
             callback: function (par) { console.log(par) }, //点击具体的菜单项后要执行的函数（par默认会传入点击的节点）
             show: true, //此垂直菜单默认为全部展开

@@ -45,6 +45,9 @@
           if (item.icon) {
               icon = `<i class="${item.icon}"></i>`;
           }
+          else {
+              icon = `<i class="default"></i>`;
+          }
           return `<li data-menu-id="${item.id}" data-id="${item.eleId}" data-parent-id="${item.parent_id}" style="padding-left: ${padding}px"> ${icon} <span>${item.name}</span> </li>`;
       }
   }
@@ -69,6 +72,13 @@
                   "children": []
               }
           ]
+      },
+      {
+          "id": 61,
+          "parent_id": 0,
+          "name": "好未来科技",
+          "eleId":123,
+          "children": []
       },
       {
           "id": 6,
@@ -246,6 +256,12 @@
         border: 5px solid transparent;
         border-left: 5px solid #191F25;
     }
+    /* 当没有后代菜单时，默认的充填位置样式 */
+    .default{
+        display: inline-block;
+        border: 5px solid transparent;
+        border-left: 5px solid #ede4e4;
+    }
 
     /* 菜单选中时的颜色控制 */
     .summary-active {
@@ -270,7 +286,8 @@
     }
 
     .${menuClassName} li {
-        font-size: 12px;
+       /* font-size: 12px; */
+         font-size: 14px; 
         font-family: Microsoft YaHei;
         font-weight: 400;
         color: #70707a;
@@ -284,7 +301,7 @@
         font-size: 14px;
         font-family: Microsoft YaHei;
         font-weight: 400;
-        color: #191f25;
+       /* color: #191f25; */
     }
 
     .${menuClassName} ul {

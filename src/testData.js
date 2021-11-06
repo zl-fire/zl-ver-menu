@@ -20,6 +20,13 @@ let data=[
         ]
     },
     {
+        "id": 61,
+        "parent_id": 0,
+        "name": "好未来科技",
+        "eleId":123,
+        "children": []
+    },
+    {
         "id": 6,
         "parent_id": 0,
         "name": "李冰有限公司B",

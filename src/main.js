@@ -117,6 +117,12 @@ function createDefaultStyle(menuClassName, width) {
         border: 5px solid transparent;
         border-left: 5px solid #191F25;
     }
+    /* 当没有后代菜单时，默认的充填位置样式 */
+    .default{
+        display: inline-block;
+        border: 5px solid transparent;
+        border-left: 5px solid #ede4e4;
+    }
 
     /* 菜单选中时的颜色控制 */
     .summary-active {
@@ -141,7 +147,8 @@ function createDefaultStyle(menuClassName, width) {
     }
 
     .${menuClassName} li {
-        font-size: 12px;
+       /* font-size: 12px; */
+         font-size: 14px; 
         font-family: Microsoft YaHei;
         font-weight: 400;
         color: #70707a;
@@ -155,7 +162,7 @@ function createDefaultStyle(menuClassName, width) {
         font-size: 14px;
         font-family: Microsoft YaHei;
         font-weight: 400;
-        color: #191f25;
+       /* color: #191f25; */
     }
 
     .${menuClassName} ul {
