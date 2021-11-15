@@ -98,7 +98,7 @@ export default function getRealDom(parObj) {
         }
     } catch {
         //模板字符串
-        let templateStr = "<section class='" + menuClassName + "'>" + creatVerMenu(data) + "</section>";
+        let templateStr = "<section class='" + menuClassName + "'>" + ` <span class="opt"> <span class="hide">折叠</span><span class="show">展开</span> </span>` + creatVerMenu(data) + "</section>";
         //样式字符串
         let styleStr = createDefaultStyle(menuClassName, width, optPos);
         //逻辑字符串
@@ -224,7 +224,7 @@ function createDefaultStyle(menuClassName, width, optPos = "right") {
         color: #7e7979;
         padding-left:20px;
         padding-right:20px;
-        width:82%;
+        width:90%;
     }
     span.opt span{
         margin-left:2px;
@@ -297,13 +297,13 @@ $("." + ${menuClassName}  + " .tit-menu").click(function () {
 });
 
 // 添加整体的折叠事件
-$("." + ${menuClassName}  + " span.opt .hide").click(function () {
-    $(".${menuClassName}>ul ul").hide(500);
+$("." + ${menuClassName} +" span.opt .hide").click(function () {
+    $("."+${menuClassName}+">ul ul").hide(500);
     $(".tit-menu i").removeClass("triangle").addClass("triangle_open");
 });
 // 添加整体的展开事件
-$("." + ${menuClassName}  + " span.opt .show").click(function () {
-    $(".${menuClassName}>ul ul").show(500);
+$("." + ${menuClassName} +" span.opt .show").click(function () {
+    $("."+${menuClassName}+">ul ul").show(500);
     $(".tit-menu i").removeClass("triangle_open").addClass("triangle");
 });
 
