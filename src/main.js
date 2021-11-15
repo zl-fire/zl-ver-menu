@@ -10,6 +10,7 @@ import datalist from "./testData";
   * @param {function} parObj.callback  点击具体的菜单项后要执行的函数（par默认会传入点击的节点）
   * @param {boolean} parObj.show {boolean} 默认全部展开还是全部收缩，默认为true.全部展开
   * @param {boolean} parObj.defaultSelect {boolean} 默认全部展开全部时（show=true），是否默认选中第一个菜单,默认为true，即选择第一个菜单
+  * @param {boolean} parObj.optPos {string} 获取样式字符串(optPos:展开折叠元素在 左边,中间还是在右边,或者不显示,默认在右边),可选值：left,right,center,none
   * @return {object|viod} 当在node端调用时，将返回一个对象{ styleStr, templateStr, jsStr }，表示菜单的html+css+js . 在浏览器调用时将会把菜单直接写入到页面上
   * */
 export default function getRealDom(parObj) {
@@ -18,17 +19,18 @@ export default function getRealDom(parObj) {
         menuClassName = "zl-ver-menu",
         callback = function (par) { console.log(par) },
         show = true,
-        defaultSelect=true,
-        width = "230px"
+        defaultSelect = true,
+        width = "230px",
+        optPos,
     } = parObj;
     //如果是在浏览器
     try {
         window;
         // 先写入全局样式
         if (!$("style." + menuClassName + "-style")[0]) {
-            $("head").append(createDefaultStyle(menuClassName, width));
+            $("head").append(createDefaultStyle(menuClassName, width, optPos));
         }
-        document.querySelector("." + menuClassName).innerHTML = creatVerMenu(data);
+        document.querySelector("." + menuClassName).innerHTML = ` <span class="opt"> <span class="hide">折叠</span><span class="show">展开</span> </span>` + creatVerMenu(data);
         //设置垂直菜单的鼠标事件
         var i = 0;
         $("." + menuClassName + " li").each(function () {
@@ -78,6 +80,18 @@ export default function getRealDom(parObj) {
                 $(this).find("i").removeClass("triangle").addClass("triangle_open"); //打开
             }
         });
+
+        // 添加整体的折叠事件
+        $("." + menuClassName + " span.opt .hide").click(function () {
+            $("." + menuClassName + ">ul ul").hide(500);
+            $(".tit-menu i").removeClass("triangle").addClass("triangle_open");
+        });
+        // 添加整体的展开事件
+        $("." + menuClassName + " span.opt .show").click(function () {
+            $("." + menuClassName + ">ul ul").show(500);
+            $(".tit-menu i").removeClass("triangle_open").addClass("triangle");
+        });
+
         if (!show) {
             $("." + menuClassName + "> ul >li ul").hide();
             $(".tit-menu i").removeClass("triangle").addClass("triangle_open");
@@ -86,15 +100,45 @@ export default function getRealDom(parObj) {
         //模板字符串
         let templateStr = "<section class='" + menuClassName + "'>" + creatVerMenu(data) + "</section>";
         //样式字符串
-        let styleStr = createDefaultStyle(menuClassName, width);
+        let styleStr = createDefaultStyle(menuClassName, width, optPos);
         //逻辑字符串
-        let jsStr = bindScript({menuClassName, show, defaultSelect,callback});
+        let jsStr = bindScript({ menuClassName, show, defaultSelect, callback });
         return { styleStr, templateStr, jsStr };
     }
 }
 
-// 获取样式字符串
-function createDefaultStyle(menuClassName, width) {
+// 获取样式字符串(optPos:展开折叠元素在 左边,中间还是在右边,或者不显示,默认在右边)
+function createDefaultStyle(menuClassName, width, optPos = "right") {
+    let posStyStr;
+    if (optPos == "right") {
+        posStyStr = `
+        span.opt {
+            text-align:right;
+        }
+        `;
+    }
+    else if (optPos == "left") {
+        posStyStr = `
+        span.opt {
+            text-align:left;
+        }
+        `;
+    }
+    else if (optPos == "center") {
+        posStyStr = `
+        span.opt {
+           text-align:center;
+        }
+        `;
+    }
+    else if (optPos == "none") {
+        posStyStr = `
+        span.opt {
+            display:none;
+         }
+        `;
+    }
+
     return `
     <style class="${menuClassName}-style" >
     html,
@@ -173,12 +217,33 @@ function createDefaultStyle(menuClassName, width) {
     .${menuClassName} li {
         list-style: none;
     }
+    span.opt {
+        display: inline-block;
+        border: 1px solid #e7dcdc;
+        padding: 2px;
+        color: #7e7979;
+        padding-left:20px;
+        padding-right:20px;
+        width:82%;
+    }
+    span.opt span{
+        margin-left:2px;
+        margin-right:2px;
+        cursor: pointer;
+    }
+    span.opt span:hover {
+        color: #4285F4;
+    }
+    span.opt span:active {
+        font-weight:bold;
+    }
+    ${posStyStr}
 </style>
     `;
 }
 
 // 获取样逻辑符串
-function bindScript({menuClassName, show, defaultSelect,callback}) {
+function bindScript({ menuClassName, show, defaultSelect, callback }) {
     menuClassName = "'" + menuClassName + "'";
     return `
 <script>
@@ -230,6 +295,19 @@ $("." + ${menuClassName}  + " .tit-menu").click(function () {
         $(this).find("i").removeClass("triangle").addClass("triangle_open"); //打开
     }
 });
+
+// 添加整体的折叠事件
+$("." + ${menuClassName}  + " span.opt .hide").click(function () {
+    $(".${menuClassName}>ul ul").hide(500);
+    $(".tit-menu i").removeClass("triangle").addClass("triangle_open");
+});
+// 添加整体的展开事件
+$("." + ${menuClassName}  + " span.opt .show").click(function () {
+    $(".${menuClassName}>ul ul").show(500);
+    $(".tit-menu i").removeClass("triangle_open").addClass("triangle");
+});
+
+// 初始化展开还是收缩
 if (!${show}) {
     $("." + ${menuClassName}  + "> ul >li ul").hide();
     $(".tit-menu i").removeClass("triangle").addClass("triangle_open");

@@ -14,7 +14,9 @@ export default function creatVerMenu(item, padding = 20) {
             }
         })
         if (flag) { //如果是对象数组，就遍历每一个对象
-            let str = "<ul class='index-ver-nav'>";
+            let str = `
+            <ul class='index-ver-nav'>
+            `;
             item.forEach((ele) => {
                 str += creatVerMenu(ele, padding);
             })
